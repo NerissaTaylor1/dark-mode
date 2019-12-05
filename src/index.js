@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom"
 import axios from "axios";
 
 import Charts from "./components/Charts";
@@ -19,10 +20,31 @@ const App = () => {
       .catch(err => console.log(err));
   }, []);
   return (
-    <div className="App">
-      <Navbar />
-      <Charts coinData={coinData} />
-    </div>
+    <Router>
+      <div className="App">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+
+            </li>
+            <li><Link to="/navbar">Nav</Link></li>
+            <li><Link to="/charts">Charts</Link></li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route path="/navbar">
+            <Navbar />
+          </Route>
+          <Route path="/charts">
+            <Charts coinData={coinData} />
+          </Route>
+        </Switch>
+
+
+
+      </div>
+    </Router>
   );
 };
 
